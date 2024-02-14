@@ -1,5 +1,11 @@
 import {Bell, PiggyBank, Search} from 'lucide-react-native';
-import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Input} from '../components/input';
 import DeliveryItem from '../components/delivery-item';
 import {useToast} from '../components/toast';
@@ -25,44 +31,47 @@ export default function HomeScreen() {
 
   return (
     <View className="flex-1">
-      <View className="bg-slate-800 p-4 flex">
-        <View className="flex flex-row items-center justify-between">
-          <View className="flex flex-row justify-center items-center gap-2">
-            <PiggyBank color="white" size={48} />
-            <Text className="text-lg color-white font-medium font-inter">
-              PigTrack
-            </Text>
-          </View>
+      <SafeAreaView className="bg-slate-800">
+        <View className="flex px-4 pb-4">
+          <View className="flex flex-row items-center justify-between">
+            <View className="flex flex-row justify-center items-center gap-2">
+              <PiggyBank color="white" size={48} />
+              <Text className="text-lg color-white font-medium font-inter">
+                PigTrack
+              </Text>
+            </View>
 
-          <TouchableOpacity>
-            <Bell color="white" size={28} />
-          </TouchableOpacity>
-        </View>
-
-        <View className="flex gap-4 mt-4">
-          <View className="mt-6">
-            <Text className="text-2xl font-bold color-white font-inter">
-              Procure sua encomenda
-            </Text>
-            <Text className="text-gray-300 font-inter">
-              Adicione o código de rastreamento para procurar por uma encomenda
-            </Text>
-          </View>
-
-          <View className="relative flex flex-col items-center justify-center">
-            <Input
-              className="bg-white rounded-[8px] w-full"
-              placeholder="AB1234566CD"
-            />
-            <TouchableOpacity
-              onPress={onAddPacket}
-              className="absolute right-3"
-            >
-              <Search size={24} color="gray" />
+            <TouchableOpacity>
+              <Bell color="white" size={28} />
             </TouchableOpacity>
           </View>
+
+          <View className="flex gap-4 mt-4">
+            <View className="mt-6">
+              <Text className="text-2xl font-bold color-white font-inter">
+                Procure sua encomenda
+              </Text>
+              <Text className="text-gray-300 font-inter">
+                Adicione o código de rastreamento para procurar por uma
+                encomenda
+              </Text>
+            </View>
+
+            <View className="relative flex flex-col items-center justify-center">
+              <Input
+                className="bg-white rounded-[8px] w-full"
+                placeholder="AB1234566CD"
+              />
+              <TouchableOpacity
+                onPress={onAddPacket}
+                className="absolute right-3"
+              >
+                <Search size={24} color="gray" />
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
-      </View>
+      </SafeAreaView>
 
       <ScrollView className="flex-1 px-4">
         <Text className="text-2xl mt-4 text-gray-900 font-bold font-inter">
