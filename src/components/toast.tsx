@@ -2,7 +2,7 @@ import {useEffect, useRef} from 'react';
 import {createContext, useContext, useState} from 'react';
 import {Animated, Text, View} from 'react-native';
 
-import {cn} from '../lib/utils';
+import {cn} from '../../lib/utils';
 
 export const toastVariants = {
   default: 'bg-black dark:bg-white',

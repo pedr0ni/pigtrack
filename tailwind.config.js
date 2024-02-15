@@ -1,9 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
+  presets: [require('nativewind/tailwind')],
   content: [
-    './components/**/*.tsx',
-    './screens/**/*.tsx',
+    './src/components/**/*.tsx',
+    './src/screens/**/*.tsx',
     './App.tsx',
   ],
   theme: {

@@ -1,4 +1,5 @@
 {
   "name": "pigtrack",
-  "displayName": "pigtrack"
+  "displayName": "pigtrack",
+  "userInterfaceStyle": "automatic"
 }

@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {Input} from '../components/input';
+import Input from '../components/input';
 import DeliveryItem from '../components/delivery-item';
 import {useToast} from '../components/toast';
 
@@ -36,7 +36,7 @@ export default function HomeScreen() {
           <View className="flex flex-row items-center justify-between">
             <View className="flex flex-row justify-center items-center gap-2">
               <PiggyBank color="white" size={48} />
-              <Text className="text-lg color-white font-medium font-inter">
+              <Text className="text-lg text-white font-bold font-inter">
                 PigTrack
               </Text>
             </View>
@@ -48,7 +48,7 @@ export default function HomeScreen() {
 
           <View className="flex gap-4 mt-4">
             <View className="mt-6">
-              <Text className="text-2xl font-bold color-white font-inter">
+              <Text className="text-2xl font-bold text-white font-inter">
                 Procure sua encomenda
               </Text>
               <Text className="text-gray-300 font-inter">
@@ -59,7 +59,7 @@ export default function HomeScreen() {
 
             <View className="relative flex flex-col items-center justify-center">
               <Input
-                className="bg-white rounded-[8px] w-full"
+                className="bg-white rounded-[8px] h-12 w-full"
                 placeholder="AB1234566CD"
               />
               <TouchableOpacity
@@ -72,19 +72,22 @@ export default function HomeScreen() {
           </View>
         </View>
       </SafeAreaView>
+      <SafeAreaView className="flex-1">
+        <View>
+          <ScrollView className="px-4">
+            <Text className="text-2xl mt-4 text-gray-900 font-bold font-inter">
+              Minhas encomendas
+            </Text>
 
-      <ScrollView className="flex-1 px-4">
-        <Text className="text-2xl mt-4 text-gray-900 font-bold font-inter">
-          Minhas encomendas
-        </Text>
-
-        {/* <View className="flex mt-2 h-[600px]"> */}
-        <View className="flex">
-          {[1, 2, 3, 4, 5, 6, 7].map(item => (
-            <DeliveryItem status={getRandomState()} key={item} />
-          ))}
+            {/* <View className="flex mt-2 h-[600px]"> */}
+            <View className="flex">
+              {[1, 2, 3, 4, 5, 6, 7].map(item => (
+                <DeliveryItem status={getRandomState()} key={item} />
+              ))}
+            </View>
+          </ScrollView>
         </View>
-      </ScrollView>
+      </SafeAreaView>
     </View>
   );
 }

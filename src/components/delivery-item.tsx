@@ -48,7 +48,7 @@ export default function DeliveryItem({status}: DeliveryItemProps) {
               • 15 may 24
             </Text>
           </View>
-          <View className="flex flex-row gap-2">
+          <View className="flex flex-row items-center gap-2">
             <Text className="text-md color-gray-500 font-inter">
               Status da Entrega:
             </Text>

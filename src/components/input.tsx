@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {cn} from '../lib/utils';
+import {cn} from '../../lib/utils';
 import {TextInput, TextInputProps} from 'react-native';
 
 const Input = React.forwardRef<TextInput, TextInputProps>(
@@ -19,4 +19,4 @@ const Input = React.forwardRef<TextInput, TextInputProps>(
 );
 Input.displayName = 'Input';
 
-export {Input};
+export default Input;
