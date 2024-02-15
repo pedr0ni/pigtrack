@@ -8,6 +8,7 @@ import {useNavigation} from '@react-navigation/native';
 import {RootNavigationProps} from '../router/routes.types';
 import {Eye, EyeOff} from 'lucide-react-native';
 import {useState} from 'react';
+import {useColorScheme} from 'nativewind';
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -15,6 +16,7 @@ const formSchema = z.object({
 });
 
 export default function LoginScreen() {
+  const {toggleColorScheme} = useColorScheme();
   const [toggleEye, setToggleEye] = useState(false);
   const {navigate} = useNavigation<RootNavigationProps>();
   const {setValue, handleSubmit} = useForm<z.infer<typeof formSchema>>({
@@ -38,7 +40,10 @@ export default function LoginScreen() {
   return (
     <SafeAreaView className="flex-1 dark:bg-slate-800">
       <View className="flex items-center">
-        <Text className="font-inter text-2xl font-bold dark:color-white">
+        <Text
+          onPress={toggleColorScheme}
+          className="font-inter text-2xl text-red-300 font-bold text-gray-800 dark:text-white"
+        >
           Entrar
         </Text>
       </View>
