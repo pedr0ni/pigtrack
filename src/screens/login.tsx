@@ -10,28 +10,27 @@ import {Eye, EyeOff} from 'lucide-react-native';
 import {useState} from 'react';
 import {useColorScheme} from 'nativewind';
 import FormInput from '../components/form-input';
-
-const formSchema = z.object({
-  email: z
-    .string({required_error: 'Digite seu e-mail'})
-    .email({message: 'Digite um e-mail válido.'}),
-  password: z.string({required_error: 'Digite sua senha.'}),
-});
+import {LoginSchema} from '../services/user/user.schemas';
+import {userClient} from '../services/user/users.client';
+import {useToast} from '../components/toast';
 
 export default function LoginScreen() {
   const {toggleColorScheme} = useColorScheme();
   const [toggleEye, setToggleEye] = useState(false);
   const {navigate} = useNavigation<RootNavigationProps>();
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const {toast} = useToast();
+
+  const {mutate, isPending} = userClient.login.useMutation({
+    onSuccess: () => navigate('Home'),
+    onError: e => toast((e.body as any).message, 'destructive'),
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-    navigate('Home');
+  const form = useForm<z.infer<typeof LoginSchema>>({
+    resolver: zodResolver(LoginSchema),
+  });
+
+  function onSubmit(values: z.infer<typeof LoginSchema>) {
+    mutate({body: values});
   }
 
   const EyeIcon = toggleEye ? Eye : EyeOff;
@@ -65,7 +64,11 @@ export default function LoginScreen() {
           className="mt-4"
         />
 
-        <Button className="my-6" onPress={form.handleSubmit(onSubmit)}>
+        <Button
+          isLoading={isPending}
+          className="my-6"
+          onPress={form.handleSubmit(onSubmit)}
+        >
           Entrar
         </Button>
 

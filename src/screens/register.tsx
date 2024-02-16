@@ -10,30 +10,30 @@ import {Eye, EyeOff} from 'lucide-react-native';
 import {useState} from 'react';
 import {useColorScheme} from 'nativewind';
 import FormInput from '../components/form-input';
-
-const formSchema = z.object({
-  name: z.string({required_error: 'Digite seu nome.'}),
-  phone: z.string({required_error: 'Digite seu telefone.'}),
-  email: z
-    .string({required_error: 'Digite seu e-mail'})
-    .email({message: 'Digite um e-mail válido.'}),
-  password: z.string({required_error: 'Digite sua senha.'}),
-});
+import {CreateUserSchema} from '../services/user/user.schemas';
+import {userClient} from '../services/user/users.client';
+import {useToast} from '../components/toast';
 
 export default function RegisterScreen() {
   const {toggleColorScheme} = useColorScheme();
   const [toggleEye, setToggleEye] = useState(false);
   const {navigate} = useNavigation<RootNavigationProps>();
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const {toast} = useToast();
+
+  const {mutate, isPending} = userClient.createUser.useMutation({
+    onSuccess: () => {
+      toast('Sua conta foi criada com sucesso', 'success');
+      navigate('Login');
+    },
+    onError: () => toast('Ocorreu um erro ao criar sua conta', 'destructive'),
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-    navigate('Home');
+  const form = useForm<z.infer<typeof CreateUserSchema>>({
+    resolver: zodResolver(CreateUserSchema),
+  });
+
+  function onSubmit(values: z.infer<typeof CreateUserSchema>) {
+    mutate({body: values});
   }
 
   const EyeIcon = toggleEye ? Eye : EyeOff;
@@ -81,7 +81,11 @@ export default function RegisterScreen() {
           className="mt-4"
         />
 
-        <Button className="my-6" onPress={form.handleSubmit(onSubmit)}>
+        <Button
+          isLoading={isPending}
+          className="my-6"
+          onPress={form.handleSubmit(onSubmit)}
+        >
           Criar conta
         </Button>
 

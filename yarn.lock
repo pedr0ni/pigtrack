@@ -2818,6 +2818,50 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.20.5":
+  version: 5.20.5
+  resolution: "@tanstack/query-core@npm:5.20.5"
+  checksum: 10c0/e41b4961a3a2518536c72c1522d8512561645af2c2fe8ae49583820b3da6c4fe87112480d617202873ade9f6aa43aa78f986b5b7bbb3f0c5714fe536183de56e
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.20.5":
+  version: 5.20.5
+  resolution: "@tanstack/react-query@npm:5.20.5"
+  dependencies:
+    "@tanstack/query-core": "npm:5.20.5"
+  peerDependencies:
+    react: ^18.0.0
+  checksum: 10c0/ca6cf3ee9702c15ed69246b5be04390910bfe8f04c1ebbab19a84102f610cdc7be6b8cc5ad8bc76ac59bc321c8d6d65cf96329c4e600e5e5938d6859162371d0
+  languageName: node
+  linkType: hard
+
+"@ts-rest/core@npm:^3.33.0":
+  version: 3.33.0
+  resolution: "@ts-rest/core@npm:3.33.0"
+  peerDependencies:
+    zod: ^3.22.3
+  peerDependenciesMeta:
+    zod:
+      optional: true
+  checksum: 10c0/5fe22268056f2480efd4a5e213ecbaedc45807ae04bf39332eadf84edf6b15e4f1caf82ffaa2c1f4462b50690f86c849a225674142b9b6e03e823892ca002302
+  languageName: node
+  linkType: hard
+
+"@ts-rest/react-query@npm:^3.33.0":
+  version: 3.33.0
+  resolution: "@ts-rest/react-query@npm:3.33.0"
+  peerDependencies:
+    "@tanstack/react-query": ^4.0.0 || ^5.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    zod: ^3.22.3
+  peerDependenciesMeta:
+    zod:
+      optional: true
+  checksum: 10c0/dc47615af9a0692c05b142a5f6ac91a677b7680c18b011ce7542983a8bbd242a84cd260405fcfb7aabc424ce378a92c6faccaaf406f96b93a7ea611faa549cf5
+  languageName: node
+  linkType: hard
+
 "@types/babel__core@npm:^7.1.14":
   version: 7.20.5
   resolution: "@types/babel__core@npm:7.20.5"
@@ -8612,6 +8656,9 @@ __metadata:
     "@react-native/typescript-config": "npm:0.73.1"
     "@react-navigation/native": "npm:^6.1.10"
     "@react-navigation/native-stack": "npm:^6.9.18"
+    "@tanstack/react-query": "npm:^5.20.5"
+    "@ts-rest/core": "npm:^3.33.0"
+    "@ts-rest/react-query": "npm:^3.33.0"
     "@types/node": "npm:20.8.2"
     "@types/react": "npm:^18.2.6"
     "@types/react-test-renderer": "npm:^18.0.0"
