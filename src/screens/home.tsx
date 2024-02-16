@@ -9,6 +9,8 @@ import {
 import Input from '../components/input';
 import DeliveryItem from '../components/delivery-item';
 import {useToast} from '../components/toast';
+import {useNavigation} from '@react-navigation/native';
+import {RootNavigationProps} from '../router/routes.types';
 
 function getRandomState() {
   const randomValue = Math.random();
@@ -23,6 +25,7 @@ function getRandomState() {
 }
 
 export default function HomeScreen() {
+  const {navigate} = useNavigation<RootNavigationProps>();
   const {toast} = useToast();
 
   const onAddPacket = () => {
@@ -42,7 +45,7 @@ export default function HomeScreen() {
             </View>
 
             <TouchableOpacity>
-              <Bell color="white" size={28} />
+              <Bell onPress={() => navigate('Login')} color="white" size={28} />
             </TouchableOpacity>
           </View>
 
@@ -72,10 +75,10 @@ export default function HomeScreen() {
           </View>
         </View>
       </SafeAreaView>
-      <SafeAreaView className="flex-1">
+      <SafeAreaView className="flex-1 dark:bg-slate-900">
         <View>
           <ScrollView className="px-4">
-            <Text className="text-2xl mt-4 text-gray-900 font-bold font-inter">
+            <Text className="text-2xl mt-4 text-gray-900 font-bold font-inter dark:text-white">
               Minhas encomendas
             </Text>
 
