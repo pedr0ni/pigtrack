@@ -1,5 +1,6 @@
 import {Bell, PiggyBank, Search} from 'lucide-react-native';
 import {
+  Image,
   SafeAreaView,
   ScrollView,
   Text,
@@ -12,17 +13,23 @@ import {useToast} from '../components/toast';
 import {useNavigation} from '@react-navigation/native';
 import {RootNavigationProps} from '../router/routes.types';
 import {userClient} from '../services/user/users.client';
+import Skeleton from '../components/skeleton';
 
 export default function HomeScreen() {
-  const {data} = userClient.getPackets.useQuery(['packets'], {
-    params: {id: '65ceb2339b979d96f46449ea'},
-  });
+  const {data, isError, isLoading, error} = userClient.getPackets.useQuery(
+    ['packets'],
+    {
+      params: {id: '65d3a88d3e8eafa03b2e5663'},
+    }
+  );
   const {navigate} = useNavigation<RootNavigationProps>();
   const {toast} = useToast();
 
   const onAddPacket = () => {
     toast('Encomenda adicionada com sucesso!', 'success');
   };
+
+  console.log(data, isLoading, error);
 
   return (
     <View className="flex-1">
@@ -74,11 +81,42 @@ export default function HomeScreen() {
               Minhas encomendas
             </Text>
 
-            <View className="flex">
+            <View className="flex-1">
+              {isLoading && (
+                <View className="flex flex-row items-center">
+                  <Skeleton classes="h-[64px] w-[64px] rounded-full" />
+                  <View className="flex ml-2">
+                    <Skeleton classes="h-[10px] w-[120px] rounded-[8px]" />
+                    <Skeleton classes="h-[10px] w-[220px] rounded-[8px] mt-2" />
+                  </View>
+                </View>
+              )}
               {data &&
                 data.body.map(item => (
                   <DeliveryItem packet={item} key={item._id} />
                 ))}
+              {data && data.body.length === 0 && (
+                <View className="flex-1 justify-center items-center">
+                  <Image
+                    className="w-[300px] h-[300px] mr-4"
+                    source={require('../../assets/empty.png')}
+                  />
+                  <Text className="text-xl mt-4 text-gray-900 font-medium font-inter dark:text-white">
+                    Você não possui nenhuma encomenda.
+                  </Text>
+                </View>
+              )}
+              {isError && (
+                <View className="flex-1 justify-center items-center">
+                  <Image
+                    className="w-[300px] h-[300px] mr-4"
+                    source={require('../../assets/error.png')}
+                  />
+                  <Text className="text-xl mt-4 text-gray-900 font-medium font-inter dark:text-white">
+                    Ocorreu um erro ao atualizar suas encomendas.
+                  </Text>
+                </View>
+              )}
             </View>
           </ScrollView>
         </View>
