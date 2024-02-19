@@ -11,20 +11,12 @@ import DeliveryItem from '../components/delivery-item';
 import {useToast} from '../components/toast';
 import {useNavigation} from '@react-navigation/native';
 import {RootNavigationProps} from '../router/routes.types';
-
-function getRandomState() {
-  const randomValue = Math.random();
-
-  if (randomValue < 0.33) {
-    return 'delivered';
-  } else if (randomValue < 0.66) {
-    return 'canceled';
-  } else {
-    return 'pending';
-  }
-}
+import {userClient} from '../services/user/users.client';
 
 export default function HomeScreen() {
+  const {data} = userClient.getPackets.useQuery(['packets'], {
+    params: {id: '65ceb2339b979d96f46449ea'},
+  });
   const {navigate} = useNavigation<RootNavigationProps>();
   const {toast} = useToast();
 
@@ -82,11 +74,11 @@ export default function HomeScreen() {
               Minhas encomendas
             </Text>
 
-            {/* <View className="flex mt-2 h-[600px]"> */}
             <View className="flex">
-              {[1, 2, 3, 4, 5, 6, 7].map(item => (
-                <DeliveryItem status={getRandomState()} key={item} />
-              ))}
+              {data &&
+                data.body.map(item => (
+                  <DeliveryItem packet={item} key={item._id} />
+                ))}
             </View>
           </ScrollView>
         </View>

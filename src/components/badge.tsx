@@ -11,8 +11,8 @@ const badgeVariants = cva(
         default: 'bg-primary',
         secondary: 'bg-secondary',
         destructive: 'bg-red-400',
-        success: 'bg-green-300 dark:bg-green-700',
-        pending: 'bg-yellow-300 dark:bg-yellow-700',
+        success: 'bg-green-300 dark:bg-green-200',
+        pending: 'bg-yellow-300 dark:bg-yellow-200',
       },
     },
     defaultVariants: {
