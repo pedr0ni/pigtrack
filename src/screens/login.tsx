@@ -13,15 +13,17 @@ import FormInput from '../components/form-input';
 import {LoginSchema} from '../services/user/user.schemas';
 import {userClient} from '../services/user/users.client';
 import {useToast} from '../components/toast';
+import {useAuthContext} from '../context/auth.context';
 
 export default function LoginScreen() {
+  const auth = useAuthContext();
   const {toggleColorScheme} = useColorScheme();
   const [toggleEye, setToggleEye] = useState(false);
   const {navigate} = useNavigation<RootNavigationProps>();
   const {toast} = useToast();
 
   const {mutate, isPending} = userClient.login.useMutation({
-    onSuccess: () => navigate('Home'),
+    onSuccess: response => auth.signIn(response.body),
     onError: e => toast((e.body as any).message, 'destructive'),
   });
 

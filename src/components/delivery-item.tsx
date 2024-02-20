@@ -1,4 +1,4 @@
-import {MoreVertical, Package} from 'lucide-react-native';
+import {Package} from 'lucide-react-native';
 import {Text, TouchableOpacity, View} from 'react-native';
 import Badge from './badge';
 import {z} from 'zod';
@@ -56,9 +56,6 @@ export default function DeliveryItem({packet}: DeliveryItemProps) {
           </View>
         </View>
       </View>
-      <TouchableOpacity>
-        <MoreVertical size={24} color="gray" />
-      </TouchableOpacity>
     </TouchableOpacity>
   );
 }

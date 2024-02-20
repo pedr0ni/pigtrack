@@ -43,6 +43,7 @@ export default function FormInput({
             'border border-gray-300 h-12 rounded-[8px] px-2',
             errors ? 'border-red-500 dark:border-red-400' : ''
           )}
+          autoCapitalize="none"
           onChange={e => form.setValue(name, e.nativeEvent.text)}
           secureTextEntry={secureTextEntry}
         />
