@@ -7,6 +7,14 @@ export const UserSchema = z.object({
   email: z.string(),
 });
 
+export const loginUserSchem = z.object({
+  _id: z.string(),
+  name: z.string(),
+  phone: z.string(),
+  email: z.string(),
+  accessToken: z.string(),
+});
+
 export const CreateUserSchema = z.object({
   name: z.string({required_error: 'Digite seu nome.'}),
   phone: z.string({required_error: 'Digite seu telefone.'}),

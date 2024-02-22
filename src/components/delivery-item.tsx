@@ -14,6 +14,7 @@ const iconColor = {
   'Objeto encaminhado': '#ca8a04',
   'Objeto saiu para entrega ao destinatário': '#ca8a04',
   'Objeto entregue ao destinatário': '#16a34a',
+  'Aguardando atualizações': '#000',
 };
 
 const roundColor = {
@@ -21,6 +22,7 @@ const roundColor = {
   'Objeto encaminhado': 'bg-yellow-200',
   'Objeto saiu para entrega ao destinatário': 'bg-yellow-200',
   'Objeto entregue ao destinatário': 'bg-green-200',
+  'Aguardando atualizações': 'bg-gray-200',
 };
 
 const badgeStatus = {
@@ -28,10 +30,14 @@ const badgeStatus = {
   'Objeto encaminhado': 'pending',
   'Objeto saiu para entrega ao destinatário': 'pending',
   'Objeto entregue ao destinatário': 'success',
+  'Aguardando atualizações': 'default',
 };
 
 export default function DeliveryItem({packet}: DeliveryItemProps) {
-  const status = packet.history[0].status;
+  const status =
+    packet.history.length > 0
+      ? packet.history[0].status
+      : 'Aguardando atualizações';
 
   return (
     <TouchableOpacity className="flex w-full flex-row justify-between items-start py-4">
@@ -46,9 +52,11 @@ export default function DeliveryItem({packet}: DeliveryItemProps) {
             <Text className="text-lg font-bold color-black font-inter">
               {packet.code}
             </Text>
-            <Text className="text-md color-gray-500 ml-2 font-inter">
-              • {moment(packet.history[0].date).format('DD/MM/YYYY HH:mm')}
-            </Text>
+            {status !== 'Aguardando atualizações' && (
+              <Text className="text-md color-gray-500 ml-2 font-inter">
+                • {moment(packet.history[0].date).format('DD/MM/YYYY HH:mm')}
+              </Text>
+            )}
           </View>
           <Text className="font-inter mb-2">{packet.name}</Text>
           <View className="flex flex-row items-center">

@@ -1,12 +1,12 @@
 import {createContext, useContext, useEffect, useState} from 'react';
 import {z} from 'zod';
-import {UserSchema} from '../services/user/user.schemas';
+import {UserSchema, loginUserSchem} from '../services/user/user.schemas';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const authContextSchema = z.object({
   user: UserSchema.optional(),
   getUser: z.function().returns(UserSchema),
-  signIn: z.function().args(UserSchema),
+  signIn: z.function().args(loginUserSchem),
   signOut: z.function(),
   isLoggedIn: z.boolean(),
 });
@@ -22,6 +22,7 @@ const useAuthContext = () => useContext(AuthContext);
 
 function AuthContextProvider({children}: {children: React.ReactNode}) {
   const [user, setUser] = useState<z.infer<typeof UserSchema>>();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -30,6 +31,8 @@ function AuthContextProvider({children}: {children: React.ReactNode}) {
       if (user) {
         setUser(JSON.parse(user));
       }
+
+      setLoading(false);
     };
 
     loadUser();
@@ -39,9 +42,10 @@ function AuthContextProvider({children}: {children: React.ReactNode}) {
     <AuthContext.Provider
       value={{
         user,
-        signIn: async user => {
+        signIn: async ({accessToken, ...user}) => {
           setUser(user);
           await AsyncStorage.setItem('user', JSON.stringify(user));
+          await AsyncStorage.setItem('accessToken', accessToken);
         },
         signOut: async () => {
           setUser(undefined);
@@ -56,7 +60,7 @@ function AuthContextProvider({children}: {children: React.ReactNode}) {
         isLoggedIn: user !== undefined,
       }}
     >
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 }

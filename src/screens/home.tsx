@@ -1,32 +1,27 @@
-import {Bell, PiggyBank, Search} from 'lucide-react-native';
+import {Bell, PiggyBank} from 'lucide-react-native';
 import {
   Image,
+  RefreshControl,
   SafeAreaView,
   ScrollView,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import Input from '../components/input';
 import DeliveryItem from '../components/delivery-item';
-import {useToast} from '../components/toast';
 import {userClient} from '../services/user/users.client';
 import Skeleton from '../components/skeleton';
 import {useAuthContext} from '../context/auth.context';
+import {useQueryClient} from '@tanstack/react-query';
+import AddPacket from '../components/add-packet';
 
 export default function HomeScreen() {
   const auth = useAuthContext();
-  const {data, isError, isLoading} = userClient.getPackets.useQuery(
-    ['packets'],
-    {
+  const queryClient = useQueryClient();
+  const {data, isError, isLoading, isRefetching} =
+    userClient.getPackets.useQuery(['packets'], {
       params: {id: auth.getUser()._id},
-    }
-  );
-  const {toast} = useToast();
-
-  const onAddPacket = () => {
-    toast('Encomenda adicionada com sucesso!', 'success');
-  };
+    });
 
   return (
     <View className="flex-1">
@@ -45,34 +40,33 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </View>
 
-          <View className="flex gap-4 mt-4">
-            <View className="mt-6">
+          <View className="flex mt-10">
+            <View>
               <Text className="text-2xl font-bold text-white font-inter">
                 Procure sua encomenda
               </Text>
-              <Text className="text-gray-300 font-inter">
+              <Text className="text-gray-300 font-inter mt-2">
                 Adicione o código de rastreamento para procurar por uma
                 encomenda
               </Text>
             </View>
 
-            <View className="relative flex flex-col items-center justify-center">
-              <Input
-                className="bg-white rounded-[8px] h-12 w-full"
-                placeholder="AB1234566CD"
-              />
-              <TouchableOpacity
-                onPress={onAddPacket}
-                className="absolute right-3"
-              >
-                <Search size={24} color="gray" />
-              </TouchableOpacity>
-            </View>
+            <AddPacket />
           </View>
         </View>
       </SafeAreaView>
       <SafeAreaView className="flex-1 dark:bg-slate-900">
-        <ScrollView className="px-4">
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefetching}
+              onRefresh={() =>
+                queryClient.invalidateQueries({queryKey: ['packets']})
+              }
+            />
+          }
+          className="px-4"
+        >
           <Text className="text-2xl mt-4 text-gray-900 font-bold font-inter dark:text-white">
             Minhas encomendas
           </Text>
@@ -98,7 +92,7 @@ export default function HomeScreen() {
             {data && data.body.length === 0 && (
               <View className="flex-1 justify-center items-center">
                 <Image
-                  className="w-[300px] h-[300px] mr-4"
+                  className="w-[300px] h-[300px]"
                   source={require('../../assets/empty.png')}
                 />
                 <Text className="text-xl mt-4 text-gray-900 font-medium font-inter dark:text-white">
@@ -109,7 +103,7 @@ export default function HomeScreen() {
             {isError && (
               <View className="flex-1 justify-center items-center">
                 <Image
-                  className="w-[300px] h-[300px] mr-4"
+                  className="w-[300px] h-[300px]"
                   source={require('../../assets/error.png')}
                 />
                 <Text className="text-xl text-center mt-4 text-gray-900 font-medium font-inter dark:text-white">

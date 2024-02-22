@@ -20,3 +20,8 @@ export const PacketSchema = z.object({
   updatedAt: z.date(),
   history: z.array(PacketHistorySchema),
 });
+
+export const createPacketSchema = z.object({
+  code: z.string(),
+  name: z.string(),
+});

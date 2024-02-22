@@ -8711,6 +8711,7 @@ __metadata:
     react: "npm:18.2.0"
     react-hook-form: "npm:^7.50.1"
     react-native: "npm:0.73.4"
+    react-native-dialog: "npm:^9.3.0"
     react-native-reanimated: "npm:^3.7.0"
     react-native-safe-area-context: "npm:^4.9.0"
     react-native-screens: "npm:^3.29.0"
@@ -9065,6 +9066,15 @@ __metadata:
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 10c0/2bdb6b93fbb1820b024b496042cce405c57e2f85e777c9aabd55f9b26d145408f9f74f5934676ffdc46f3dcff656d78413a6e43968e7b3f92eea35b3052e9053
+  languageName: node
+  linkType: hard
+
+"react-native-dialog@npm:^9.3.0":
+  version: 9.3.0
+  resolution: "react-native-dialog@npm:9.3.0"
+  peerDependencies:
+    react-native: ">=0.63.0"
+  checksum: 10c0/bda8e9cc96b99bdc7291b64c16a983ef131af291610e640ea88a7064ce8442cfd32db4fb0a1bb29a64a5c3da8ca51d4f0a8f2e279887a0056dee692a0e74b3d7
   languageName: node
   linkType: hard
 
