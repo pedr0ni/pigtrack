@@ -16,4 +16,11 @@ export const packetContract = c.router({
       authorization: z.string(),
     }),
   },
+  getPacket: {
+    method: 'GET',
+    path: '/:id',
+    responses: {
+      200: PacketSchema,
+    },
+  },
 });

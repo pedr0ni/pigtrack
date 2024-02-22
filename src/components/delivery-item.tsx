@@ -4,6 +4,8 @@ import Badge from './badge';
 import {z} from 'zod';
 import {PacketSchema} from '../services/packet/packet.schemas';
 import moment from 'moment';
+import {useNavigation} from '@react-navigation/native';
+import {RootNavigationProps} from '../router/routes.types';
 
 interface DeliveryItemProps {
   packet: z.infer<typeof PacketSchema>;
@@ -34,13 +36,17 @@ const badgeStatus = {
 };
 
 export default function DeliveryItem({packet}: DeliveryItemProps) {
+  const {navigate} = useNavigation<RootNavigationProps>();
   const status =
     packet.history.length > 0
       ? packet.history[0].status
       : 'Aguardando atualizações';
 
   return (
-    <TouchableOpacity className="flex w-full flex-row justify-between items-start py-4">
+    <TouchableOpacity
+      onPress={() => navigate('Packet', {id: packet._id})}
+      className="flex w-full flex-row justify-between items-start py-4"
+    >
       <View className="flex flex-row items-center gap-4">
         <View
           className={`h-[64px] w-[64px] ${roundColor[status]} flex items-center justify-center rounded-full`}

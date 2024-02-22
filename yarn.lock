@@ -2914,6 +2914,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/base-64@npm:^1":
+  version: 1.0.2
+  resolution: "@types/base-64@npm:1.0.2"
+  checksum: 10c0/3ad69002bd9ca4e79c010f6d9a4c9d09967687153fa6bb98e9459c731219609a4ac76920451565784e9d98cbe3567429eb60bd1561918c3a6ea2436d894346af
+  languageName: node
+  linkType: hard
+
 "@types/graceful-fs@npm:^4.1.3":
   version: 4.1.9
   resolution: "@types/graceful-fs@npm:4.1.9"
@@ -3672,6 +3679,13 @@ __metadata:
   version: 1.0.2
   resolution: "balanced-match@npm:1.0.2"
   checksum: 10c0/9308baf0a7e4838a82bbfd11e01b1cb0f0cf2893bc1676c27c2a8c0e70cbae1c59120c3268517a8ae7fb6376b4639ef81ca22582611dbee4ed28df945134aaee
+  languageName: node
+  linkType: hard
+
+"base-64@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "base-64@npm:1.0.0"
+  checksum: 10c0/d886cb3236cee0bed9f7075675748b59b32fad623ddb8ce1793c790306aa0f76a03238cad4b3fb398abda6527ce08a5588388533a4ccade0b97e82b9da660e28
   languageName: node
   linkType: hard
 
@@ -7296,6 +7310,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jwt-decode@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "jwt-decode@npm:4.0.0"
+  checksum: 10c0/de75bbf89220746c388cf6a7b71e56080437b77d2edb29bae1c2155048b02c6b8c59a3e5e8d6ccdfd54f0b8bda25226e491a4f1b55ac5f8da04cfbadec4e546c
+  languageName: node
+  linkType: hard
+
 "keyv@npm:^4.5.3":
   version: 4.5.4
   resolution: "keyv@npm:4.5.4"
@@ -8694,16 +8715,19 @@ __metadata:
     "@tanstack/react-query": "npm:^5.20.5"
     "@ts-rest/core": "npm:^3.33.0"
     "@ts-rest/react-query": "npm:^3.33.0"
+    "@types/base-64": "npm:^1"
     "@types/node": "npm:20.8.2"
     "@types/react": "npm:^18.2.6"
     "@types/react-test-renderer": "npm:^18.0.0"
     babel-jest: "npm:^29.6.3"
+    base-64: "npm:^1.0.0"
     class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.1.0"
     eslint: "npm:^8.19.0"
     eslint-plugin-node: "npm:^11.1.0"
     gts: "npm:^5.2.0"
     jest: "npm:^29.6.3"
+    jwt-decode: "npm:^4.0.0"
     lucide-react-native: "npm:^0.330.0"
     moment: "npm:^2.30.1"
     nativewind: "npm:3.0.0-next.34"
