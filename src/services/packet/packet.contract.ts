@@ -23,4 +23,12 @@ export const packetContract = c.router({
       200: PacketSchema,
     },
   },
+  deletePacket: {
+    method: 'DELETE',
+    path: '/:id',
+    body: null,
+    responses: {
+      200: z.object({}),
+    },
+  },
 });

@@ -10,10 +10,10 @@ import {
 } from 'react-native';
 import DeliveryItem from '../components/delivery-item';
 import {userClient} from '../services/user/users.client';
-import Skeleton from '../components/skeleton';
 import {useAuthContext} from '../context/auth.context';
 import {useQueryClient} from '@tanstack/react-query';
 import AddPacket from '../components/add-packet';
+import PacketSkeleton from '../components/packet-skeleton';
 
 export default function HomeScreen() {
   const auth = useAuthContext();
@@ -75,13 +75,7 @@ export default function HomeScreen() {
             {isLoading && (
               <>
                 {[1, 2, 3, 4, 5].map(item => (
-                  <View key={item} className="flex flex-row items-center mt-4">
-                    <Skeleton classes="h-[64px] w-[64px] rounded-full" />
-                    <View className="flex ml-2">
-                      <Skeleton classes="h-[10px] w-[120px] rounded-[8px]" />
-                      <Skeleton classes="h-[10px] w-[220px] rounded-[8px] mt-2" />
-                    </View>
-                  </View>
+                  <PacketSkeleton key={item} />
                 ))}
               </>
             )}
